@@ -1,0 +1,30 @@
+<%= stylesheet_link_tag 'registro', media: 'all', 'data-turbolinks-track': 'reload' %>
+<%= form_with(model: post, local: true, html: { class: "registration-form" }) do |form| %>
+  <% if post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(post.errors.count, "error") %> impediram que este post fosse salvo:</h2>
+
+      <ul>
+      <% post.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-field">
+    <%= form.label :title , "Titulo"%><br>
+    <%= form.text_field :title %>
+  </div>
+
+  <div class="form-field">
+    <%= form.label :body, "Descrição"%><br>
+    <%= form.text_area :body %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Criar", class: 'btn' %>
+  <%= link_to 'Voltar', posts_path, class: 'btn-voltar'%>
+  </div>
+
+<% end %>

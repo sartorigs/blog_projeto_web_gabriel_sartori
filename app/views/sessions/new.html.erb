@@ -1,0 +1,25 @@
+
+<%= stylesheet_link_tag 'login', media: 'all', 'data-turbolinks-track': 'reload' %>
+<h1 class="login-title">Login</h1>
+
+<%= form_with(scope: :session, url: login_path, local: true, html: { class: "login-form" }) do |form| %>
+  <% if flash[:alert] %>
+    <p class="alert-message"><%= flash[:alert] %></p>
+  <% end %>
+
+  <div class="form-field">
+    <%= form.label :email %><br>
+    <%= form.email_field :email %>
+  </div>
+
+  <div class="form-field">
+    <%= form.label :password, "Senha" %><br>
+    <%= form.password_field :password %>
+  </div>
+
+  <div class="form-actions">
+    <%= form.submit "Entrar", class: "submit-button" %>
+  </div>
+<% end %>
+
+<%= link_to 'Registrar novo usuário', signup_path, class: "signup-link" %>

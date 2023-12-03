@@ -1,0 +1,18 @@
+<!-- app/views/posts/index.html.erb -->
+<%= stylesheet_link_tag 'postindex', media: 'all', 'data-turbolinks-track': 'reload' %>
+<h1>Posts</h1>
+<%= link_to 'Novo Post', new_post_path, class: 'btn'  %>
+<div class="posts-container">
+  <% @posts.each do |post| %>
+    <div class="post">
+      <%= link_to post do %>
+        <h2 class="post-title"><%= post.title %></h2>
+      <% end %>
+      <p class="post-body"><%= post.body %></p>
+      <p class="post-user">Postado por: <%= post.user.name %></p>
+      <p class="post-time">Publicado em: <%= post.created_at.strftime("%d/%m/%Y %H:%M") %></p>
+    </div>
+  <% end %>
+</div>
+
+

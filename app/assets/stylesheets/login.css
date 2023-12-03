@@ -1,0 +1,49 @@
+.login-title {
+    color: #333;
+    text-align: center;
+  }
+  
+  .alert-message {
+    color: red;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  .login-form{
+    max-width: 25%;
+    margin: auto;
+  }
+  .login-form .form-field {
+    margin-bottom: 20px;
+  }
+  
+  .login-form label {
+    font-weight: bold;
+    display: block;
+  }
+  
+  .login-form input[type="email"], .login-form input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+  }
+  
+  .form-actions {
+    text-align: center;
+  }
+  
+  .submit-button {
+    background-color: blue;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .signup-link {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+  }
+  

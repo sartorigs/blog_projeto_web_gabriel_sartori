@@ -1,0 +1,43 @@
+<%= stylesheet_link_tag 'registro', media: 'all', 'data-turbolinks-track': 'reload' %>
+
+<h1 class="registration-title">Novo Usuário</h1>
+
+<%= form_with model: @user, url: users_path, html: { class: "registration-form" } do |form| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation" class="error-messages">
+      <h2><%= pluralize(@user.errors.count, "erro") %> impediram que este usuário fosse salvo:</h2>
+
+      <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-field">
+    <%= form.label :name, "Nome" %><br>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="form-field">
+    <%= form.label :email %><br>
+    <%= form.email_field :email %>
+  </div>
+
+  <div class="form-field">
+    <%= form.label :password, "Senha" %><br>
+    <%= form.password_field :password %>
+  </div>
+
+  <div class="form-field">
+    <%= form.label :password_confirmation, "Confirmação de Senha" %><br>
+    <%= form.password_field :password_confirmation %>
+  </div>
+
+  <div class="form-actions">
+    <%= form.submit "Registrar", class: "submit-button" %>
+  </div>
+<% end %>
+
+<%= link_to 'Volta para o login', login_path, class: "login-link" %>

@@ -1,0 +1,29 @@
+<%= stylesheet_link_tag 'postshow', media: 'all', 'data-turbolinks-track': 'reload' %>
+
+<div class="post-show-container">
+  <h1 class="post-title"><%= @post.title %></h1>
+  <p class="post-body"><%= @post.body %></p>
+  <p class="post-details">Postado por: <%= @post.user.name %> em <%= @post.created_at.strftime("%d/%m/%Y %H:%M") %></p>
+</div>
+
+<%= form_with(model: [ @post, @post.comments.build ], local: true) do |form| %>
+  <p>
+    <%= form.text_area :body, placeholder: "Adicione um comentário..." %>
+  </p>
+  <%= form.submit "Comentar" %>
+<% end %>
+
+<h2>Comentários</h2>
+<% if @post.comments.count == 0 %>
+  <p class="no-comments">Não há comentários ainda. Seja o primeiro a comentar!</p>
+<% else %>
+  <% @post.comments.each do |comment| %>
+  <% if comment.user %>
+    <div class="comment">
+      <strong><%= comment.user.name if comment.user %>:</strong>
+      <p><%= comment.body %></p>
+    </div>
+    <% end %>
+  <% end %>
+<% end %>
+<%= link_to 'Voltar', posts_path, class: 'btn' %>

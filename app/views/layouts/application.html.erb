@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Blog - Gabriel Sartori</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+
+<body>
+<body>
+<% if session[:user_id] %>
+  <% @current_user = User.find(session[:user_id]) %>
+  <header class="main-header">
+    <nav>
+      <ul>
+          <li class="user-dropdown" >
+
+          <p>Olá, <%= @current_user.name %></p>
+          <ul class="dropdown-content" style="display: none">
+            <div style="display:flex; justify-content: center;">
+              <%= button_to 'Logout', logout_path, method: :delete, class: 'logout' %>
+            </div>
+          </ul>
+        </li>
+
+      </ul>
+    </nav>
+  </header>
+<% end %>
+<div class="conteudo">
+  <%= yield %>
+</div>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var dropdown = document.querySelector('.user-dropdown');
+    dropdown.addEventListener('click', function() {
+      var dropdownContent = this.querySelector('.dropdown-content');
+      dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
+    });
+  });
+</script>
+</body>
+</html>
