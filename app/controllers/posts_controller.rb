@@ -26,26 +26,33 @@ class PostsController < ApplicationController
     end
   end
 
+  def edit
+    @post = Post.find(params[:id])
+    if current_user != @post.user
+      redirect_to posts_path, alert: "Você não tem permissão para editar este post."
+    end
+  end
+
   def update
-    respond_to do |format|
-      if @post.update(post_params)
-        format.html { redirect_to post_url(@post), notice: "Post was successfully updated." }
-        format.json { render :show, status: :ok, location: @post }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
-      end
+    @post = Post.find(params[:id])
+    if @post.update(post_params)
+      redirect_to @post, notice: "Post atualizado com sucesso."
+    else
+      render :edit
     end
   end
 
   def destroy
-    @post.destroy
-
-    respond_to do |format|
-      format.html { redirect_to posts_url, notice: "Post was successfully destroyed." }
-      format.json { head :no_content }
+    @post = Post.find(params[:id])
+    if current_user == @post.user
+      @post.comments.destroy_all
+      @post.destroy
+      redirect_to posts_path, notice: "Post excluído com sucesso."
+    else
+      redirect_to posts_path, alert: "Você não tem permissão para excluir este post."
     end
   end
+
 
   private
     def set_post

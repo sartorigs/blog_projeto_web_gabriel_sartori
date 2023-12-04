@@ -11,6 +11,13 @@
       <p class="post-body"><%= post.body %></p>
       <p class="post-user">Postado por: <%= post.user.name %></p>
       <p class="post-time">Publicado em: <%= post.created_at.strftime("%d/%m/%Y %H:%M") %></p>
+      <% if current_user == post.user %>
+      <div style="display:flex; justify-content: space-between;">
+        <%= button_to 'Editar', edit_post_path(post),method: :get,class: 'btn' %>
+        <%= button_to 'Deletar', post_path(post), method: :delete, data: { confirm: "Você tem certeza?" }, class:'btn', style:'background-color: #ff0000;' %>
+      </div>
+
+      <% end %>
     </div>
   <% end %>
 </div>
